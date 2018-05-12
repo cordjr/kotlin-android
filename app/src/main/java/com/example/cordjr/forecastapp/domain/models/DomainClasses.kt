@@ -5,4 +5,7 @@ data class ForecastModel(val date: String, val description: String, val high: In
 data class ForecastList(val city: String,
                         val country: String,
                         val dailyForecast: List<ForecastModel>
-                        )
+) {
+    val size: Int get() = dailyForecast.size
+
+}

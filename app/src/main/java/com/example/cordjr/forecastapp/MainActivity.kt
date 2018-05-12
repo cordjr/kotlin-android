@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.example.cordjr.forecastapp.data.Request
+import com.example.cordjr.forecastapp.domain.commands.ForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+
         doRequest()
 
     }
@@ -31,9 +32,9 @@ class MainActivity : AppCompatActivity() {
     fun doRequest(){
         val url = "http://api.openweathermap.org/data/2.5/forecast/daily?APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=met\\3ric&cnt=7"
         doAsync {
-            Request(url).run()
+            val result =  ForecastCommand("94043").execute()
             uiThread {
-                longToast("Request Performed")
+                forecastList.adapter = ForecastListAdapter(result)
             }
         }
     }

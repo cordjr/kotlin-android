@@ -13,7 +13,7 @@ class ForecastDataMapper {
 
 
 
-    private  fun convertFromDataModel(forecast: ForecastResult): ForecastList = ForecastList(forecast.city.name, forecast.city.country, convertForecastListDomain(forecast.list))
+     fun convertFromDataModel(forecast: ForecastResult): ForecastList = ForecastList(forecast.city.name, forecast.city.country, convertForecastListDomain(forecast.list))
 
     private fun convertForecastListDomain(list: List<Forecast>): List<ForecastModel>{
         return list.mapIndexed { index, forecast->
